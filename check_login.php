@@ -18,11 +18,11 @@
 	$Pass=$_POST["Password"];
 
 	$result = mysqli_query($con,"SELECT * FROM member WHERE UserName='$UserName' AND Pass='$Pass'");
-	//$i=0;
+	$i=0;
 	
 	while($row = mysqli_fetch_array($result))
 	{
-		//$i++; 
+		$i++; 
 		$arrayLogin = array();
 		array_push($arrayLogin, $row['MID']);
 		array_push($arrayLogin, $row['UserName']);
@@ -32,10 +32,10 @@
 		echo $jsonLogin;
 	}
 
-	/*if($i==0){
-
-		echo "<h1>User or Password incorrect!!</h1>";
-	}*/
+	if($i==0){
+		$err = json_encode('stop');
+		echo $err;
+	}
 	
 
 	mysqli_close($con);
